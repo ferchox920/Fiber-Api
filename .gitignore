@@ -1,0 +1,68 @@
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+
+# Folders
+_obj
+_test
+test_output
+_vendor
+node_modules
+*.egg-info
+*.egg
+
+# Go specific
+*.exe
+*.test
+*.prof
+*.cover
+
+# Binaries for programs and plugins
+*.exe
+*.out
+*.dll
+*.so
+*.dylib
+
+# Log files
+*.log
+
+# Environment-specific stuff
+*.env
+*.env.*
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*.local
+.env.*.development
+.env.*.production
+.env.*.test
+
+# Dependency directories (remove the ones that you are using)
+/vendor/
+/go.sum
+/go.sum.sig
+/Godeps/
+/_workspace/
+
+# Output files
+/dist/
+/dist/*
+/dist/**/*.exe
+/dist/**/*.out
+
+# Compiled Go binaries (remove the ones that you are using)
+*.exe
+*.out
+*.test
+
+# MacOS specific files
+.DS_Store
+
+# Air specific
+.air.toml
+
+# SQLite database file (remove this line if you don't want to ignore the database file)
+*.db
