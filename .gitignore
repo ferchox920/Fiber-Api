@@ -46,7 +46,7 @@ node_modules
 /go.sum.sig
 /Godeps/
 /_workspace/
-
+tmp
 # Output files
 /dist/
 /dist/*
