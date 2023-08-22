@@ -44,7 +44,7 @@ func FindUserByID(c *fiber.Ctx) error {
 }
 
 func UpdateUser(c *fiber.Ctx) error {
-	userID := c.Params("id") // Obtener el ID de los parámetros de la URL
+	userID := c.Params("id") 
 
 	var user models.User
 	result := database.Database.Db.First(&user, userID)
@@ -58,10 +58,15 @@ func UpdateUser(c *fiber.Ctx) error {
 		return c.Status(400).JSON(fiber.Map{"message": err.Error()})
 	}
 
-	database.Database.Db.Model(&user).Updates(updateUser)
+	// Excluir la modificación del campo ID
+	updateUser.ID = user.ID
+
+	// Actualizar otros campos del usuario
+	database.Database.Db.Model(&user).Omit("ID").Updates(updateUser) // Utiliza Omit para excluir el campo ID
 	responseUser := CreateResponseUser(user)
 	return c.Status(200).JSON(responseUser)
 }
+
 func DeleteUser(c *fiber.Ctx) error {
 	userID := c.Params("id") // Obtener el ID de los parámetros de la URL
 
