@@ -7,4 +7,5 @@ type Product struct {
 	CreatedAt time.Time
 	Name string `json:"name"`
 	SerialNumber string `json:"serial_number"` 
+	Description string `json:"description"`
 }
