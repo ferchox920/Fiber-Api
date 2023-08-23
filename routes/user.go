@@ -1,6 +1,8 @@
 package routes
 
 import (
+	"errors"
+
 	"github.com/ferchox920/fiber-api/database"
 	"github.com/ferchox920/fiber-api/models"
 	"github.com/gofiber/fiber/v2"
@@ -26,7 +28,7 @@ func CreateUser(c *fiber.Ctx) error {
 
 	database.Database.Db.Create(&user)
 	responseUser := CreateResponseUser(user)
-	return c.Status(200).JSON(responseUser)
+	return c.Status(201).JSON(responseUser)
 }
 
 func FindUserByID(c *fiber.Ctx) error {
@@ -43,8 +45,16 @@ func FindUserByID(c *fiber.Ctx) error {
 	return c.Status(200).JSON(responseUser)
 }
 
+func findUser(id int, user *models.User) error {
+	database.Database.Db.Find(&user, "id = ?", id)
+	if user.ID == 0 {
+		return errors.New("user does not exist")
+	}
+	return nil
+}
+
 func UpdateUser(c *fiber.Ctx) error {
-	userID := c.Params("id") 
+	userID := c.Params("id")
 
 	var user models.User
 	result := database.Database.Db.First(&user, userID)

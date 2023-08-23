@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"errors"
 	"github.com/ferchox920/fiber-api/database"
 	"github.com/ferchox920/fiber-api/models"
 	"github.com/gofiber/fiber/v2"
@@ -44,6 +45,15 @@ func CreateProduct(c *fiber.Ctx) error {
 
 	responseProduct := CreateResponseProduct(product)
 	return c.Status(fiber.StatusCreated).JSON(responseProduct)
+}
+
+func findProduct(id int, product *models.Product) error {
+
+	database.Database.Db.Find(&product, "id = ?", id)
+	if product.ID == 0 {
+		return errors.New("product does not exist")
+	}
+	return nil
 }
 
 func GetAllProducts(c *fiber.Ctx) error {
